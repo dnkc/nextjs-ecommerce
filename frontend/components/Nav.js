@@ -10,10 +10,10 @@ import CartCount from "./CartCount";
 const Nav = () => {
   const user = useUser();
   const { openCart } = useCart();
-
   return (
     <NavStyles>
       <Link href="/products">Products</Link>
+
       {user && (
         <>
           <Link href="/sell">Sell</Link>
