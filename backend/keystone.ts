@@ -1,3 +1,4 @@
+import { CartItem } from "./schemas/CartItem";
 import "dotenv/config";
 import { config, createSchema } from "@keystone-next/keystone/schema";
 import { createAuth } from "@keystone-next/auth";
@@ -10,6 +11,7 @@ import { User } from "./schemas/User";
 import { ProductImage } from "./schemas/ProductImage";
 import { insertSeedData } from "./seed-data";
 import { sendPasswordResetEmail } from "./lib/mail";
+import { extendGraphQLSchema } from "./mutations";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost/keystone-sick-fits-tutorial";
@@ -59,7 +61,9 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
+    extendGraphqlSchema: extendGraphQLSchema,
     ui: {
       // show the ui only for people who pass this test
       isAccessAllowed: ({ session }) => {

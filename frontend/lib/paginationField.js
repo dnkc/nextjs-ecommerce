@@ -27,11 +27,11 @@ export default function paginationField() {
       }
 
       // if there are items, return them from the cache, do not go to network
-      if (items.length) {
-        console.log(
-          `There are ${items.length} items in the cache! Gonna send them to apollo.`
-        );
-      }
+      // if (items.length) {
+      //   console.log(
+      //     `There are ${items.length} items in the cache! Gonna send them to apollo.`
+      //   );
+      // }
       return items;
     },
 
@@ -41,13 +41,13 @@ export default function paginationField() {
       // when apollo tries to query for all products:
       // first thing: read function for those items
       // two things possible: return items bc they are in cache OR return false from here (makes a network request)
-      console.log(`Merging items from the network ${incoming.length}`);
+      // console.log(`Merging items from the network ${incoming.length}`);
       const { skip, first } = args;
       const merged = existing ? existing.slice(0) : [];
       for (let i = skip; i < skip + incoming.length; ++i) {
         merged[i] = incoming[i - skip];
       }
-      console.log(merged);
+      // console.log(merged);
       // return merged items from cache
       return merged;
     },

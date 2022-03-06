@@ -1,5 +1,6 @@
 import Document, { Html, Head, NextScript, Main } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import { useCart } from "../lib/cartState";
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
