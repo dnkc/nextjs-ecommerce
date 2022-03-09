@@ -9,6 +9,11 @@ import {
 import SickButton from "./styles/SickButton";
 import { useState } from "react";
 import nProgress from "nprogress";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import { useCart } from "../lib/cartState";
+import { CURRENT_USER_QUERY } from "./User";
 
 const CheckoutFormStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -22,11 +27,33 @@ const NEXT_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY;
 
 const stripeLib = loadStripe(NEXT_KEY);
 
+const CREATE_ORDER_MUTATION = gql`
+  mutation CREATE_ORDER_MUTATION($token: String!) {
+    checkout(token: $token) {
+      id
+      charge
+      total
+      items {
+        id
+        name
+      }
+    }
+  }
+`;
+
 function CheckoutForm() {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
+  const { closeCart } = useCart();
+
+  const [checkout, { error: graphQLError }] = useMutation(
+    CREATE_ORDER_MUTATION,
+    { refetchQueries: [{ query: CURRENT_USER_QUERY }] }
+  );
+
   async function handleSubmit(e) {
     // stop form from submitting and turn loader on
     e.preventDefault();
@@ -38,28 +65,37 @@ function CheckoutForm() {
       type: "card",
       card: elements.getElement(CardElement),
     });
+    // console.log("HELLO", paymentMethod);
     // handle any errors from stripe (CC declined, etc)
     if (error) {
       setError(error);
+      nProgress.done();
+      return; //stops the checkout from happening
     }
-    // console.log(paymentMethod);
     // console.log(error);
     // send the token from step 3 to our keystone server, via custom mutation
-
+    const order = await checkout({
+      variables: {
+        token: paymentMethod.id,
+      },
+    });
+    //console.log("finished with the order!", order);
     // change the page to view the order
-
+    router.push({
+      pathname: "/order",
+      query: { id: order.data.checkout.id },
+    });
     // close the cart
-
+    closeCart();
     // turn the loader off
     setLoading(false);
     nProgress.done();
-
-    console.log("to do");
   }
 
   return (
     <CheckoutFormStyles onSubmit={handleSubmit}>
-      {error && <p style={{ fontSize: 12 }}>error.message</p>}
+      {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
+      {graphQLError && <p style={{ fontSize: 12 }}>{graphQLError.message}</p>}
       <CardElement />
       <SickButton>Check Out Now</SickButton>
     </CheckoutFormStyles>
