@@ -1,3 +1,5 @@
+import { permissionsList } from "./schemas/fields";
+import { Role } from "./schemas/Role";
 import { OrderItem } from "./schemas/OrderItem";
 import { Order } from "./schemas/Order";
 import { CartItem } from "./schemas/CartItem";
@@ -66,6 +68,7 @@ export default withAuth(
       CartItem,
       OrderItem,
       Order,
+      Role,
     }),
     extendGraphqlSchema: extendGraphQLSchema,
     ui: {
@@ -77,7 +80,7 @@ export default withAuth(
     },
     session: withItemData(statelessSessions(sessionConfig), {
       //graphql query
-      User: `id`,
+      User: `id name email role {${permissionsList.join(" ")}}`,
     }),
   })
 );

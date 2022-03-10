@@ -1,11 +1,14 @@
 import React from "react";
 import CreateProduct from "../components/CreateProduct";
 import Page from "../components/Page";
+import PleaseSignIn from "../components/PleaseSignIn";
 
 const SellPage = () => {
   return (
     <div>
-      <CreateProduct />
+      <PleaseSignIn>
+        <CreateProduct />
+      </PleaseSignIn>
     </div>
   );
 };

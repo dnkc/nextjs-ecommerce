@@ -36,6 +36,7 @@ const CREATE_ORDER_MUTATION = gql`
       items {
         id
         name
+        quantity
       }
     }
   }
@@ -82,8 +83,7 @@ function CheckoutForm() {
     //console.log("finished with the order!", order);
     // change the page to view the order
     router.push({
-      pathname: "/order",
-      query: { id: order.data.checkout.id },
+      pathname: `/order/${order.data.checkout.id}`,
     });
     // close the cart
     closeCart();

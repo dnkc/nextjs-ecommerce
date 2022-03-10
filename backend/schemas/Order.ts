@@ -7,8 +7,15 @@ import {
   virtual,
 } from "@keystone-next/fields";
 import formatMoney from "../lib/formatMoney";
+import { isSignedIn, rules } from "../access";
 
 export const Order = list({
+  access: {
+    create: isSignedIn,
+    read: rules.canOrder,
+    update: () => false,
+    delete: () => false,
+  },
   // todo: access
   fields: {
     label: virtual({
