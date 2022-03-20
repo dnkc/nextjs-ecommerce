@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "keystone-next",
+    "start": "keystone-next",
     "seed-data": "keystone-next --seed-data",
     "deploy": "prisma1 deploy --env-file .env"
   },
