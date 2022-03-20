@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "keystone-next",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider && npx browserslist@latest --update-db && keystone-next --production",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider && keystone-next --production",
     "seed-data": "keystone-next --seed-data",
     "deploy": "prisma1 deploy --env-file .env"
   },
