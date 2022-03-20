@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "keystone-next",
-    "seed-data": "keystone-next --seed-data"
+    "seed-data": "keystone-next --seed-data",
+    "deploy": "prisma1 deploy --env-file .env"
   },
   "eslintConfig": {
     "extends": "wesbos/typescript.js",
@@ -44,6 +45,7 @@
     "@keystonejs/server-side-graphql-client": "^1.1.2",
     "@types/nodemailer": "^6.4.0",
     "dotenv": "^8.2.0",
+    "graphql-cli": "^4.1.0",
     "next": "^10.0.5",
     "nodemailer": "^6.4.17",
     "react": "^16.14.0",
