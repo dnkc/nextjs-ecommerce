@@ -24,7 +24,7 @@ const sessionConfig = {
   maxAge: 60 * 60 * 24 * 360, // how long should they stay signed in
   secret: process.env.COOKIE_SECRET,
 };
-
+// pls
 const { withAuth } = createAuth({
   listKey: "User",
   identityField: "email",
