@@ -4,7 +4,7 @@ import PriceTag from "./styles/PriceTag";
 import Link from "next/link";
 import formatMoney from "../lib/formatMoney";
 import DeleteProduct from "./DeleteProduct";
-import AddToCart from "./addToCart";
+import AddToCart from "./AddToCart";
 
 const Product = ({ product }) => {
   return (
