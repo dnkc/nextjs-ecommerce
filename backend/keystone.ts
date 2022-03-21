@@ -46,7 +46,7 @@ export default withAuth(
   config({
     server: {
       cors: {
-        origin: ["https://dk-sickfits-next-prod.herokuapp.com/"],
+        origin: [process.env.FRONTEND_URL],
         credentials: true,
       },
     },
