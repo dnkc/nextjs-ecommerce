@@ -1,3 +1,4 @@
+import { AccessControl } from "./types";
 import { permissionsList } from "./schemas/fields";
 import { Role } from "./schemas/Role";
 import { OrderItem } from "./schemas/OrderItem";
@@ -46,7 +47,7 @@ export default withAuth(
     server: {
       cors: {
         origin: [process.env.FRONTEND_URL],
-        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
         credentials: true,
       },
     },
