@@ -46,7 +46,7 @@ export default withAuth(
   config({
     server: {
       cors: {
-        origin: [process.env.FRONTEND_URL],
+        origin: ["*", process.env.FRONTEND_URL],
         methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
         headers: ["Content-Type", "X-Requested-With", "Authorization"],
         credentials: true,
