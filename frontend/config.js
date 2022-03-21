@@ -2,3 +2,4 @@
 export const endpoint = `http://localhost:3000/api/graphql`;
 export const prodEndpoint = `https://sickfits-yoga-prod.herokuapp.com/`;
 export const perPage = 4;
+//pls
