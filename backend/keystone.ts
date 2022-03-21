@@ -17,8 +17,7 @@ import { insertSeedData } from "./seed-data";
 import { sendPasswordResetEmail } from "./lib/mail";
 import { extendGraphQLSchema } from "./mutations";
 // pls
-const databaseURL =
-  process.env.DATABASE_URL || "mongodb://localhost/keystone-sick-fits-tutorial";
+const databaseURL = process.env.DATABASE_URL || "";
 
 const sessionConfig = {
   maxAge: 60 * 60 * 24 * 360, // how long should they stay signed in
