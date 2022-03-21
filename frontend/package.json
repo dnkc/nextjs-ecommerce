@@ -11,6 +11,9 @@
     "heroku-postbuild": "next build"
   },
   "author": "",
+  "engines": {
+    "node": "16.8.0"
+  },
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "3.4.0",
