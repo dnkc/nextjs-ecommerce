@@ -16,6 +16,7 @@ type User {
   resetTokenExpiry: Float
   permissions: [Permission] @scalarList(strategy: RELATION)
   cart: [CartItem!]! @scalarList(strategy: RELATION)
+  orders: [OrderItem] @scalarList(strategy: RELATION)
 }
 
 type Item {
