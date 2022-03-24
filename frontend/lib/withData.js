@@ -28,14 +28,16 @@ function createClient({ headers, initialState }) {
           credentials: "include",
         },
         // pass the headers along from this request. This enables SSR with logged in state
-        headers,
+        headers: {
+          ...headers,
+          "Access-Control-Allow-Origin": "*",
+        },
       }),
     ]),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
           fields: {
-            // TODO: We will add this together!
             allProducts: paginationField(),
           },
         },
